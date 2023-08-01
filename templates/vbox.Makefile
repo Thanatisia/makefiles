@@ -3,29 +3,30 @@
 
 ## Variables/Ingredients
 ### Device/Hardware variables
-DISK_LABEL = "/dev/sdX"
+DISK_LABEL ?= "/dev/sdX"
 
 ### Hypervisor
 HYPERVISOR = "VirtualBox"
-HV_FLDR_BIN = "/path/to/hypervisor"
+HV_FLDR_BIN ?= "/path/to/hypervisor"
 HV_MANAGE = "vboxmanage"
 HV_HEADLESS = "vboxheadless"
 HV_STOP = "vboxheadless"
 
 ### Storage/Virtual Disk variables
-DISK_IMAGE_PATH = "/path/to/disk/image"
-DISK_IMAGE_FILE = "archlinux.vdi"
-DISK_IMAGE_SIZE = "xMiB"
-VMDK_FILE_PATH = "/path/to/vmdk/"
-VMDK_FILE_NAME = "file.vmdk"
-VMDK_FILE_SIZE = "xMiB"
+DISK_IMAGE_PATH ?= "/path/to/disk/image"
+DISK_IMAGE_FILE ?= "archlinux.vdi"
+DISK_IMAGE_SIZE ?= "xMiB"
+VMDK_FILE_PATH ?= "/path/to/vmdk/"
+VMDK_FILE_NAME ?= "file.vmdk"
+VMDK_FILE_SIZE ?= "xMiB"
 
 ### Virtual Machine settings
-VM_NAME = "vm-name"
-VM_OPTS = "vm-opts"
-VM_CONTROL_OPTS = ""
-VRDE_PORT_NUMBER = 3389
-VRDE_ADDRESS = 192.168.1.X
+VM_NAME ?= "vm-name"
+VM_OPTS ?= "vm-opts"
+VM_CONTROL_OPTS ?= 
+INSPECT_OPTS ?= 
+VRDE_PORT_NUMBER ?= 3389
+VRDE_ADDRESS ?= 192.168.1.X
 
 ### System
 # SHELL := /bin/bash
@@ -81,6 +82,7 @@ help_Targets:
 	@echo -e "\tvm_list              : List a hypervisor information using ${HV_MANAGE};  Please specify 'VM_LIST_KEYWORD=[your-search-query]"
 	@echo -e "\tvm_list_all          : List all Virtual Machines"
 	@echo -e "\tvm_list_running      : List all currently-running Virtual Machines"
+	@echo -e "\tvm_inspect           : inspect and List Virtual Machine logs and information"
 	@echo -e "VirtualBox-specific"
 	@echo -e "\tvirtual_disk_unregister : De/unregister Virtual Disk from VirtualBox"
 	@echo -e "\tvm_unregister        : De/unregister a registered Virtual Machine from VirtualBox"
@@ -121,6 +123,7 @@ help_Variables:
 	@echo -e "VM_OPTS         : Contains the target Virtual Machine's additional/other configurations to startup with"
 	@echo -e "VM_CONTROL_OPTS : Contains the target Virtual Machine's system control options (i.e. reset, poweroff, pause, etc)"
 	@echo -e "VM_LIST_KEYWORD : Contains a target keyword to parse into a hypervisor's list function (i.e. VirtualBox = vboxmanage list keyword)"
+	@echo -e "INSPECT_OPTS    : Contains additional options for inspecting/logging of specified Virtual Machine"
 	### VirtualBox-related
 	@echo -e "VRDE_ADDRESS    : Contains the IP address for your Virtualization RDP Engine (VRDE) server; Used for VirtualBox"
 	@echo -e "VRDE_PORT_NUMBER: Contains the port number to startup your Virtualization RDP Engine (VRDE) server; Used for VirtualBox"
@@ -169,6 +172,7 @@ vars:
 	@echo -e "VM_OPTS         : ${VM_OPTS}"
 	@echo -e "VM_CONTROL_OPTS : ${VM_CONTROL_OPTS}"
 	@echo -e "VM_LIST_KEYWORD : ${VM_LIST_KEYWORD}"
+	@echo -e "INSPECT_OPTS    : ${INSPECT_OPTS}"
 	### VirtualBox-related
 	@echo -e "VRDE_ADDRESS    : ${VRDE_ADDRESS}"
 	@echo -e "VRDE_PORT_NUMBER: ${VRDE_PORT_NUMBER}"
@@ -297,4 +301,7 @@ vm_list_running:
 	## List all running Virtual Machines
 	${HV_MANAGE} list runningvms
 
+vm_inspect:
+	## inspect and List Virtual Machine logs and information
+	${HV_MANAGE} showvminfo ${VM_NAME} ${INSPECT_OPTS}
 
