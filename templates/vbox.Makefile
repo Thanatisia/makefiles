@@ -10,11 +10,12 @@ HYPERVISOR = "VirtualBox"
 HV_FLDR_BIN ?= "/path/to/hypervisor"
 HV_MANAGE = "vboxmanage"
 HV_HEADLESS = "vboxheadless"
+HV_SDL = "vboxsdl"
 HV_STOP = "vboxheadless"
 
 ### Storage/Virtual Disk variables
 DISK_IMAGE_PATH ?= "/path/to/disk/image"
-DISK_IMAGE_FILE ?= "archlinux.vdi"
+DISK_IMAGE_FILE ?= "disk.vdi"
 DISK_IMAGE_SIZE ?= "xMiB"
 VMDK_FILE_PATH ?= "/path/to/vmdk/"
 VMDK_FILE_NAME ?= "file.vmdk"
@@ -79,6 +80,9 @@ help_Targets:
 	@echo -e "\tvm_resume            : Resume specified paused Virtual Machine"
 	@echo -e "\tvm_restart           : Restart the specified running Virtual Machine"
 	@echo -e "\tvm_stop              : Stop specified Virtual Machine"
+	@echo -e "\tvm_attach            : Attach to a detached Virtual Machine window (if it is running)"
+	@echo -e "\tvm_show              : Show a hidden Virtual Machine window"
+	@echo -e "\tvm_hide              : Hide a Virtual Machine window"
 	@echo -e "\tvm_list              : List a hypervisor information using ${HV_MANAGE};  Please specify 'VM_LIST_KEYWORD=[your-search-query]"
 	@echo -e "\tvm_list_all          : List all Virtual Machines"
 	@echo -e "\tvm_list_running      : List all currently-running Virtual Machines"
@@ -116,6 +120,7 @@ help_Variables:
 	@echo -e "HV_FLDR_BIN     : Contains the Hypervisor's BIN folder containing the executables"
 	@echo -e "HV_MANAGE       : Contains the Hypervisor's Management function/utility (i.e. VirtualBox = vboxmanage)"
 	@echo -e "HV_HEADLESS     : Contains the Hypervisor's Headless startup function/utility (i.e. VirtualBox = vboxheadless)"
+	@echo -e "HV_SDL          : Contains the Hypervisor's SDL command" 
 	@echo -e "HV_STOP         : Contains the Hypervisor's Stop command"
 	### Virtual Machine settings
 	@echo -e "CONF_OPTS       : Contains your configuration options you want to modify the VM with"
@@ -288,6 +293,20 @@ vm_stop:
 	@echo -e "Stop Virtual Machine ${VM_NAME}"
 	## ${HV_MANAGE} controlvm ${VM_NAME} acpipowerbutton]
 	${HV_MANAGE} controlvm ${VM_NAME} poweroff
+
+vm_attach:
+	## Attach to a detach Virtual Machine window
+	${HV_SDL} --startvm ${VM_NAME} --separate &
+
+vm_show:
+	## Show a hidden Virtual Machine GUI
+	@echo -e "Showing hidden Virtual Machine ${VM_NAME}"
+	${HV_MANAGE} startvm ${VM_NAME} --type separate
+
+vm_hide:
+	## Hide a Virtual Machine Display
+	@echo -e "Hiding Virtual Machine ${VM_NAME}"
+	@echo -e "WIP"
 
 vm_list:
 	## List a Virtual Machine specified by user
