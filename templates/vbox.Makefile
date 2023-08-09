@@ -31,7 +31,7 @@ VRDE_ADDRESS ?= 192.168.1.X
 
 ### System
 # SHELL := /bin/bash
-.PHONY := help help_Targets help_Variables
+.PHONY := help help_Targets help_Variables help_Quickstart
 .DEFAULT_GOAL := help
 
 ## Others 
@@ -51,6 +51,7 @@ help_Targets:
 	@echo -e "General"
 	@echo -e "\thelp_Targets         : Display all targets"
 	@echo -e "\thelp_Variables       : Display all variables"
+	@echo -e "\thelp_Quickstart      : Display possible usage and snippets"
 	@echo -e "\thelp                 : Display help menu"
 	@echo -e "\tsetup                : Perform general setup"
 	@echo -e "\tstart                : Begin/Startup Virtual Machine"
@@ -133,11 +134,27 @@ help_Variables:
 	@echo -e "VRDE_ADDRESS    : Contains the IP address for your Virtualization RDP Engine (VRDE) server; Used for VirtualBox"
 	@echo -e "VRDE_PORT_NUMBER: Contains the port number to startup your Virtualization RDP Engine (VRDE) server; Used for VirtualBox"
 
+help_Quickstart:
+	## Quickstart usage
+	@echo -e "======================="
+	@echo -e " Quickstart            "
+	@echo -e " Snippets and Examples "
+	@echo -e "======================="
+	@echo -e "- List all variables: {VARIABLE=value} make vars"
+	@echo -e "- Configure Virtual Machine as headless: make vm_configure_remote"
+	@echo -e "- Startup   Virtual Machine as headless: make vm_start_headless"
+	@echo -e "- Stop      Virtual Machine: make vm_stop"
+	@echo -e "- Configure a specific virtual machine from command line as headless: VM_NAME=\"'Virtual Machine Name with spaces'\" make vm_configure_remote"
+	@echo -e "- Startup a specific virtual machine from command line as headless: VM_NAME=\"'Virtual Machine Name with spaces'\" make vm_configure_remote vm_start_headless"
+	@echo -e "- Stop a specific virtual machine from command line: VM_NAME=\"'Virtual Machine Name with spaces'\" make vm_stop"
+
 help:
 	## Display help menu
 	@make -s help_Targets 
 	@echo -e ""
 	@make -s help_Variables
+	@echo -e ""
+	@make -s help_Quickstart
 
 setup:
 	## Manage/Setup Environment
