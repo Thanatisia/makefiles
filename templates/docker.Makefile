@@ -29,6 +29,7 @@ CONTAINER_OPTS ?= --restart=unless-stopped # Other Options; i.e. --user=${USER},
 CONTAINER_PORT_FORWARDING ?=    # Port Forward/Translate/Map from host system to container; -p "[host-ip-address]:[host-system-port]:[container-port]"
 CONTAINER_MOUNT_VOLUMES ?=      # Mount Host System Volume; -v "[host-system-volume]:[container-volume]:[permissions]"
 CONTAINER_PASSTHROUGH_DEVICE ?= # --device "[host-system-device-file]:[container-mount-point]"
+CONTAINER_EXEC ?= ${SHELL} # Command to execute
 
 ### System
 SHELL := /bin/bash
@@ -39,14 +40,17 @@ SHELL := /bin/bash
 help:
 	## Display help message
 	@echo -e "[+] help : Display Help message"
-	@echo -e "[+] build-stage-1 : Build Stage 1 image from multi-stage build"
+	@echo -e "[+] build-stage-1 : Build Stage 1 (Base) image from multi-stage build"
+	@echo -e "[+] build-stage-N : Build Stage N image from multi-stage build"
 	@echo -e "[+] run : Startup a container from an image"
 	@echo -e "[+] enter : Chroot and enter the container"
+	@echo -e "[+] exec : Execute command in container"
 	@echo -e "[+] start : Start the container if stopped and exists"
 	@echo -e "[+] stop : Stop the container if running"
 	@echo -e "[+] restart : Restart the container if running"
 	@echo -e "[+] remove : Remove the container if exists"
 	@echo -e "[+] logs : Display logs of the container"
+	@echo -e "[+] proc : Display processes of the container"
 
 build-stage-1:
 	## Build image from Dockerfile
@@ -95,7 +99,17 @@ logs:
 	## Display logs of the container
 	@docker logs ${CONTAINER_NAME}
 
+proc:
+	## Display processes of the container
+	@test -n "${CONTAINER_NAME}" && \
+		docker ps | grep ${CONTAINER_NAME} || \
+		docker ps
+
 enter:
 	## Chroot and enter the container
 	@docker exec -it ${CONTAINER_NAME} ${SHELL}
+
+exec:
+	## Execute command in container
+	@docker exec -it ${CONTAINER_NAME} ${CONTAINER_EXEC}
 
