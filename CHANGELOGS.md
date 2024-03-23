@@ -11,3 +11,11 @@
         - Updated targets, instructions and variables to be more current 
             + based on the format of the docker Makefile I used in my newer projects
 
+### 2024-03-23
+#### 1455H
+- Updates
+    - Updated 'docker.Makefile' in 'templates/'
+        - Added new instructions/targets
+            + proc : Display processes of the container
+            + exec : Execute command in container
+
