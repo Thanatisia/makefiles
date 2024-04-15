@@ -47,30 +47,31 @@ setup:
 	@test -d ${VENV_DIRECTORY} || python3 -m venv ${VENV_DIRECTORY}
 
 $(PROJECT_NAME): setup
-	@${VENV_DIRECTORY}/bin/python -m pip install "git+${GIT_REMOTE_REPOSITORY_SERVER}/${PROJECT_AUTHOR}/${PROJECT_NAME}#subdirectories=${PROJECT_SUBDIRECTORY}"
+	@${VENV_DIRECTORY}/Scripts/python -m pip install "git+${GIT_REMOTE_REPOSITORY_SERVER}/${PROJECT_AUTHOR}/${PROJECT_NAME}#subdirectories=${PROJECT_SUBDIRECTORY}"
 
 install-git: setup $(PROJECT_NAME)
 
 install-pip: setup
-	@${VENV_DIRECTORY}/bin/python -m pip install ${PIP_DEPENDENCIES}
+	@${VENV_DIRECTORY}/Scripts/python -m pip install ${PIP_DEPENDENCIES}
 
 get-venv-git-packages: setup
-	@${VENV_DIRECTORY}/bin/python -m pip freeze list | grep "@"
+	@${VENV_DIRECTORY}/Scripts/python -m pip freeze list | grep "@"
 
 get-venv-pip-packages: setup
-	@${VENV_DIRECTORY}/bin/python -m pip freeze list | grep --invert-match "@"
+	@${VENV_DIRECTORY}/Scripts/python -m pip freeze list | grep --invert-match "@"
 
 get-venv-packages: setup
-	@${VENV_DIRECTORY}/bin/python -m pip freeze list
+	@${VENV_DIRECTORY}/Scripts/python -m pip freeze list
 
 edit: setup
 	## Passthrough and edit a file through the virtual environment
 	@test -f ${SOURCE_FILE_DIR}/${SOURCE_FILE_NAME} && \
-		. ${VENV_DIRECTORY}/bin/activate && ${EDITOR} ${SOURCE_FILE_DIR}/${SOURCE_FILE_NAME} || \
+		. ${VENV_DIRECTORY}/Scripts/activate && ${EDITOR} ${SOURCE_FILE_DIR}/${SOURCE_FILE_NAME} || \
 		echo -e "Source File ${SOURCE_FILE_DIR}/${SOURCE_FILE_NAME} does not exists."
 
 run: setup
 	## Passthrough/run a python file through the virtual environment
 	@test -f ${SOURCE_FILE_DIR}/${SOURCE_FILE_NAME} && \
-		${VENV_DIRECTORY}/bin/python ${SOURCE_FILE_DIR}/${SOURCE_FILE_NAME} ${ARGS} || \
+		${VENV_DIRECTORY}/Scripts/python ${SOURCE_FILE_DIR}/${SOURCE_FILE_NAME} ${ARGS} || \
 		echo -e "Source File ${SOURCE_FILE_DIR}/${SOURCE_FILE_NAME} does not exists."
+

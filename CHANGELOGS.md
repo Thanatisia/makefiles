@@ -3,6 +3,7 @@
 ## Table of Contents
 + [2024-03-14](#2024-03-14)
 + [2024-04-14](#2024-04-14)
++ [2024-04-15](#2024-04-15)
 
 ## Entry Logs
 ### 2024-03-14
@@ -28,4 +29,11 @@
 - Updates
     - Updated document 'README.md' in 'custom/'
         + Added new entry
+
+### 2024-04-15
+#### 1722H
+- New
+    + Added a windows variant 'python-venv.windows.Makefile' of 'python-venv.linux.Makefile' in 'customs/python'
+- Updates
+    + Renamed 'python-venv.Makefile' => 'python-venv.linux.Makefile' in 'customs/python'
 
