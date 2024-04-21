@@ -3,17 +3,24 @@
 
 ## Variables
 
+### Environment Variables
+ENV_VAR_PS1 ?= $(PS1)
+
 ### Git Packages
 PROJECT_AUTHOR ?= author-name# Set this as the project author's name
 PROJECT_NAME ?= project-name# Set as the target project repository name to clone
 PROJECT_SUBDIRECTORY ?= .# Set as /path/to/project/root
 GIT_REMOTE_REPOSITORY_SERVER ?= https://github.com# Set the git remote repository server ip address/domain
 
+### Python
+PY_EXEC ?= python
+
 ### Python PyPI Packages
 PIP_DEPENDENCIES ?= -Ur requirements.txt# Set a list/array of all python pip packages to install via PyPI; Recommended: -Ur requirements.txt
 
 ### Virtual Environment Configurations
 VENV_DIRECTORY ?= env
+VENV_PROMPT ?= ($(VENV_DIRECTORY)) $(ENV_VAR_PS1)> #${PS1:-}
 
 ### Source Codes
 SOURCE_FILE_DIR = .
@@ -38,13 +45,14 @@ help:
 	@echo -e "get-venv-packages : chroots into the virtual environment and print the installed python packages"
 	@echo -e "edit : Passthrough and edit a file through the virtual environment"
 	@echo -e "run : Passthrough/run a python file through the virtual environment"
+	@echo -e "enter : Chroot into the Virtual Environments root filesystem"
 
 usage:
 	## Display usages
 	@echo -e "install git and pip packages: PROJECT_NAME=[custom-package-to-install] make install-pip install-git"
 
 setup:
-	@test -d ${VENV_DIRECTORY} || python3 -m venv ${VENV_DIRECTORY}
+	@test -d ${VENV_DIRECTORY} || ${PY_EXEC} -m venv ${VENV_DIRECTORY}
 
 $(PROJECT_NAME): setup
 	@${VENV_DIRECTORY}/Scripts/python -m pip install "git+${GIT_REMOTE_REPOSITORY_SERVER}/${PROJECT_AUTHOR}/${PROJECT_NAME}#subdirectories=${PROJECT_SUBDIRECTORY}"
@@ -74,4 +82,10 @@ run: setup
 	@test -f ${SOURCE_FILE_DIR}/${SOURCE_FILE_NAME} && \
 		${VENV_DIRECTORY}/Scripts/python ${SOURCE_FILE_DIR}/${SOURCE_FILE_NAME} ${ARGS} || \
 		echo -e "Source File ${SOURCE_FILE_DIR}/${SOURCE_FILE_NAME} does not exists."
+
+enter: setup
+	## Chroot into the Virtual Environments root filesystem
+	## Command: $$SHELL --rcfile <(echo "export PS1=\"(utils-chroot) ${PS1:-}\"")
+	@. ${VENV_DIRECTORY}/bin/activate && \
+		$$SHELL --rcfile <(echo "export PS1=\"${VENV_PROMPT}\"")
 
