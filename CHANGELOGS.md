@@ -5,6 +5,7 @@
 + [2024-04-14](#2024-04-14)
 + [2024-04-15](#2024-04-15)
 + [2024-04-21](#2024-04-21)
++ [2024-04-24](#2024-04-24)
 
 ## Entry Logs
 ### 2024-03-14
@@ -53,4 +54,13 @@
 - Updates
     - Updated Makefile 'python-venv.windows.Makefile' in 'custom/python'
         + Fixed error path '[virtual-environment-name]/bin' => '[virtual-environment-name]/Scripts'
+
+### 2024-04-24
+#### 0006H
+- New
+    - Added new directory 'linux' in 'custom/'
+        + Added new custom Makefile 'chroot.Makefile' for streamlining chrooting into a root filesystem
+- Updates
+    - Updated document 'README.md' in 'custom/'
+        + Added new entry
 

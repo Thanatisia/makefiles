@@ -5,7 +5,11 @@ Please place all your custom Makefiles for the various languages/technologies he
 ```
 
 ## Currently supported Makefiles 
-### languages
+### Operating System
+- linux
+    - [chroot simplifier](linux/chroot.Makefile)
+
+### Languages
 - python
     - python virtual environment automanager
         + [Linux](python/python-venv.linux.Makefile)
