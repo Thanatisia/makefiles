@@ -86,6 +86,6 @@ run: setup
 enter: setup
 	## Chroot into the Virtual Environments root filesystem
 	## Command: $$SHELL --rcfile <(echo "export PS1=\"(utils-chroot) ${PS1:-}\"")
-	@. ${VENV_DIRECTORY}/bin/activate && \
+	@. ${VENV_DIRECTORY}/Scripts/activate && \
 		$$SHELL --rcfile <(echo "export PS1=\"${VENV_PROMPT}\"")
 

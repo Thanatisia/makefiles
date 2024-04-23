@@ -48,3 +48,9 @@
     - Updated Makefile 'python-venv.windows.Makefile' in 'custom/python'
         + Added target to chroot into the Virtual Environment with custom variables for customizing the prompt
 
+### 2024-04-23
+#### 2216H
+- Updates
+    - Updated Makefile 'python-venv.windows.Makefile' in 'custom/python'
+        + Fixed error path '[virtual-environment-name]/bin' => '[virtual-environment-name]/Scripts'
+
