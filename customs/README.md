@@ -7,7 +7,9 @@ Please place all your custom Makefiles for the various languages/technologies he
 ## Currently supported Makefiles 
 ### languages
 - python
-    + [python virtual environment automanager](python/python-venv.Makefile)
+    - python virtual environment automanager
+        + [Linux](python/python-venv.linux.Makefile)
+        + [Windows](python/python-venv.windows.Makefile)
 
 ### Technologies
 

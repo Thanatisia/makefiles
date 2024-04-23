@@ -4,6 +4,7 @@
 + [2024-03-14](#2024-03-14)
 + [2024-04-14](#2024-04-14)
 + [2024-04-15](#2024-04-15)
++ [2024-04-21](#2024-04-21)
 
 ## Entry Logs
 ### 2024-03-14
@@ -36,4 +37,20 @@
     + Added a windows variant 'python-venv.windows.Makefile' of 'python-venv.linux.Makefile' in 'customs/python'
 - Updates
     + Renamed 'python-venv.Makefile' => 'python-venv.linux.Makefile' in 'customs/python'
+
+### 2024-04-21
+#### 1515H
+- Updates
+    - Updated document 'README.md' in 'custom/'
+        + Added linux and windows support entries to 'python virtual environment automanager' Makefile template
+    - Updated Makefile 'python-venv.linux.Makefile' in 'custom/python'
+        + Added target to chroot into the Virtual Environment with custom variables for customizing the prompt
+    - Updated Makefile 'python-venv.windows.Makefile' in 'custom/python'
+        + Added target to chroot into the Virtual Environment with custom variables for customizing the prompt
+
+### 2024-04-23
+#### 2216H
+- Updates
+    - Updated Makefile 'python-venv.windows.Makefile' in 'custom/python'
+        + Fixed error path '[virtual-environment-name]/bin' => '[virtual-environment-name]/Scripts'
 
