@@ -6,6 +6,7 @@
 + [2024-04-15](#2024-04-15)
 + [2024-04-21](#2024-04-21)
 + [2024-04-24](#2024-04-24)
++ [2024-05-16](#2024-05-16)
 
 ## Entry Logs
 ### 2024-03-14
@@ -63,4 +64,28 @@
 - Updates
     - Updated document 'README.md' in 'custom/'
         + Added new entry
+
+### 2024-05-16
+#### 0922H
+- Updates
+    - Updated Makefile 'python-venv.linux.Makefile' in 'custom/python'
+        + Updated help message
+        - Added new variables/ingredients
+            + VENV_SCRIPTS
+            + VENV_PYTHON_BIN
+        - Added new targets/rules
+            + pip-install
+            + pip-script-install
+            + pip-upgrade
+            + refresh-packages
+    - Updated Makefile 'python-venv.windows.Makefile' in 'custom/python'
+        + Updated help message
+        - Added new variables/ingredients
+            + VENV_SCRIPTS
+            + VENV_PYTHON_BIN
+        - Added new targets/rules
+            + pip-install
+            + pip-script-install
+            + pip-upgrade
+            + refresh-packages
 

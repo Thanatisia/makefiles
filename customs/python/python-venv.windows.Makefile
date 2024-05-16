@@ -20,6 +20,8 @@ PIP_DEPENDENCIES ?= -Ur requirements.txt# Set a list/array of all python pip pac
 
 ### Virtual Environment Configurations
 VENV_DIRECTORY ?= env
+VENV_SCRIPTS ?= $(VENV_DIRECTORY)/Scripts
+VENV_PYTHON_BIN ?= $(VENV_SCRIPTS)/$(PY_EXEC)
 VENV_PROMPT ?= ($(VENV_DIRECTORY)) $(ENV_VAR_PS1)> #${PS1:-}
 
 ### Source Codes
@@ -38,11 +40,15 @@ help:
 	@echo -e "help: Display Help Menu"
 	@echo -e "usage: Display various usage snippets"
 	@echo -e "setup : Perform pre-requisite setup"
+	@echo -e "pip-install : Install python-pip if it does not exist using the 'ensurepip' python module"
+	@echo -e "pip-script-install : Install python-pip if it does not exist using the 'get-pip.py' standalone script"
+	@echo -e "pip-upgrade : Upgrade python-pip to the latest version"
 	@echo -e "install-git : Install the specified project via a git repository"
 	@echo -e "install-pip : Install the specified package via pip"
 	@echo -e "get-venv-git-packages : chroots into the virtual environment and print the installed git repository packages"
 	@echo -e "get-venv-pip-packages : chroots into the virtual environment and print the installed pip repository packages"
 	@echo -e "get-venv-packages : chroots into the virtual environment and print the installed python packages"
+	@echo -e "refresh-packages : Reinstall all packages/dependencies"
 	@echo -e "edit : Passthrough and edit a file through the virtual environment"
 	@echo -e "run : Passthrough/run a python file through the virtual environment"
 	@echo -e "enter : Chroot into the Virtual Environments root filesystem"
@@ -57,6 +63,20 @@ setup:
 $(PROJECT_NAME): setup
 	@${VENV_DIRECTORY}/Scripts/python -m pip install "git+${GIT_REMOTE_REPOSITORY_SERVER}/${PROJECT_AUTHOR}/${PROJECT_NAME}#subdirectories=${PROJECT_SUBDIRECTORY}"
 
+pip-install:
+	## Install python-pip if it does not exist using the 'ensurepip' python module
+	@${VENV_PYTHON_BIN} -m ensurepip --upgrade
+
+pip-script-install:
+	## Install python-pip if it does not exist using the 'get-pip.py' standalone script
+	@curl -L -O https://bootstrap.pypa.io/get-pip.py && \
+		echo -e "[+] Python pip bootstrap installation script 'get-pip.py' downloaded successfully"; python get-pip.py || \
+		echo -e "[-] Error downloading the Python pip bootstrap installation script 'get-pip.py'"
+
+pip-upgrade:
+	## Upgrade python-pip to the latest version
+	@${VENV_PYTHON_BIN} -m pip install --upgrade pip
+
 install-git: setup $(PROJECT_NAME)
 
 install-pip: setup
@@ -70,6 +90,10 @@ get-venv-pip-packages: setup
 
 get-venv-packages: setup
 	@${VENV_DIRECTORY}/Scripts/python -m pip freeze list
+
+refresh-packages: setup
+	## Reinstall all packages/dependencies
+	@${VENV_PYTHON_BIN} -m pip install -r requirements.txt --force-reinstall --no-cache-dir
 
 edit: setup
 	## Passthrough and edit a file through the virtual environment
