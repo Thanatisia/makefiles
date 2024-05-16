@@ -4,7 +4,7 @@
 
 ### Documentation Settings
 #### System Command
-command ?= "command-here"
+command ?= command-here
 #### Demo Recording
 demo_recording_output_filename ?= output.cast
 #### Asciinema/agg options
@@ -23,5 +23,5 @@ help:
 
 record:
 	## Record the demo using asciinema-util (asciinema options)
-	@asciinema rec -c ${command} ${asciinema_options} ${demo_recording_output_filename}
+	@asciinema rec -c "${command}" ${asciinema_options} ${demo_recording_output_filename}
 
