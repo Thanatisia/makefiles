@@ -17,3 +17,12 @@ Please place all your custom Makefiles for the various languages/technologies he
 
 ### Technologies
 
+### Applications
+- asciinema/asciinema-agg
+    + [asciinema documentation screen recorder](applications/asciinema.Makefile)
+    + [asciinema-agg documentation recording to gif converter](applications/asciinema-agg.Makefile)
+
+### Development
+- documentations
+    + [Makefile containing targets/rules/functions for documentation generating using asciinema and asciinema-agg](development/documentations-asciinema.Makefile)
+

@@ -89,3 +89,17 @@
             + pip-upgrade
             + refresh-packages
 
+#### 1809H
+- New
+    - Added new directories in 'customs/'
+        - 'applications' : For containing Makefiles pertaining to applications
+            + Added new Makefile for 'asciinema' (asciinema.Makefile)
+            + Added new Makefile for 'asciinema-agg' (asciinema-agg.Makefile)
+        - 'development' : For containing Makefiles regarding development/software development/programming
+            + Added new Makefile for documentation (documentation.Makefile)
+- Updates
+    - Updated document 'README.md' in 'customs/'
+        - Added new custom Makefile root directories
+            + applications
+            + development
+
