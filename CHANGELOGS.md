@@ -103,3 +103,12 @@
             + applications
             + development
 
+#### 1823H
+- Updates
+    - Updated Makefile 'asciinema.Makefile' in 'customs/applications'
+        - Fixed bug where commands with spaces only register the command (first element)
+            + Added quotation to the recipe/target instead of the variable
+    - Updated Makefile 'documentations-asciinema.Makefile' in 'customs/development'
+        - Fixed bug where commands with spaces only register the command (first element)
+            + Added quotation to the recipe/target instead of the variable
+
