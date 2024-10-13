@@ -7,6 +7,7 @@
 + [2024-04-21](#2024-04-21)
 + [2024-04-24](#2024-04-24)
 + [2024-05-16](#2024-05-16)
++ [2024-10-13](#2024-10-13)
 
 ## Entry Logs
 ### 2024-03-14
@@ -111,4 +112,9 @@
     - Updated Makefile 'documentations-asciinema.Makefile' in 'customs/development'
         - Fixed bug where commands with spaces only register the command (first element)
             + Added quotation to the recipe/target instead of the variable
+
+### 2024-10-13
+#### 2147H
+- New
+    + Added new Makefile 'golang.Makefile' in 'templates/'
 
